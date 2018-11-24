@@ -1,4 +1,4 @@
-package com.example.server;
+package com.superclass.server;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
