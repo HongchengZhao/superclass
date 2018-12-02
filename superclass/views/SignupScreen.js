@@ -28,250 +28,258 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 const SCREEN_HEIGHT = Dimensions.get('window').height
 
 export default class SignupScreen extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			isLoading: false,
-			selectedType: null,
-			username: '',
-			email: '',
-			password: '',
-			confirmationPassword: '',
-			emailValid: true,
-			passwordValid: true,
-			usernameValid: true,
-			confirmationPasswordValid: true,
+	static navigationOptions = ({ navigation }) => ({
+		title: 'Sign up',
+		headerStyle: {
+			backgroundColor: '#293046',
 		}
+	})
 
-		this.setSelectedType = this.setSelectedType.bind(this)
-		this.validateEmail = this.validateEmail.bind(this)
-		this.validatePassword = this.validatePassword.bind(this)
-		this.validateConfirmationPassword = this.validateConfirmationPassword.bind(this)
-		this.signup = this.signup.bind(this)
+
+constructor(props) {
+	super(props)
+
+	this.state = {
+		isLoading: false,
+		selectedType: null,
+		username: '',
+		email: '',
+		password: '',
+		confirmationPassword: '',
+		emailValid: true,
+		passwordValid: true,
+		usernameValid: true,
+		confirmationPasswordValid: true,
 	}
 
-	async componentDidMount() {
+	this.setSelectedType = this.setSelectedType.bind(this)
+	this.validateEmail = this.validateEmail.bind(this)
+	this.validatePassword = this.validatePassword.bind(this)
+	this.validateConfirmationPassword = this.validateConfirmationPassword.bind(this)
+	this.signup = this.signup.bind(this)
+}
 
-	}
+async componentDidMount() {
 
-	signup() {
-		LayoutAnimation.easeInEaseOut()
-		const usernameValid = this.validateUsername()
-		const emailValid = this.validateEmail()
-		const passwordValid = this.validatePassword()
-		const confirmationPasswordValid = this.validateConfirmationPassword()
-		if (
-			emailValid &&
-			passwordValid &&
-			confirmationPasswordValid &&
-			usernameValid
-		) {
+}
+
+signup() {
+	LayoutAnimation.easeInEaseOut()
+	const usernameValid = this.validateUsername()
+	const emailValid = this.validateEmail()
+	const passwordValid = this.validatePassword()
+	const confirmationPasswordValid = this.validateConfirmationPassword()
+	if (
+		emailValid &&
+		passwordValid &&
+		confirmationPasswordValid &&
+		usernameValid
+	) {
+		this.setState({
+			isLoading: true
+		})
+		setTimeout(() => {
+			LayoutAnimation.easeInEaseOut()
 			this.setState({
-				isLoading: true
+				isLoading: false
 			})
-			setTimeout(() => {
-				LayoutAnimation.easeInEaseOut()
-				this.setState({
-					isLoading: false
-				})
-				Alert.alert('🎸', 'You rock')
-			}, 1500)
-		}
+			Alert.alert('🎸', 'You rock')
+		}, 1500)
 	}
+}
 
-	validateUsername() {
-		const {
-			username
-		} = this.state
-		const usernameValid = username.length > 0
-		LayoutAnimation.easeInEaseOut()
-		this.setState({
-			usernameValid
-		})
-		usernameValid || this.usernameInput.shake()
-		return usernameValid
-	}
+validateUsername() {
+	const {
+		username
+	} = this.state
+	const usernameValid = username.length > 0
+	LayoutAnimation.easeInEaseOut()
+	this.setState({
+		usernameValid
+	})
+	usernameValid || this.usernameInput.shake()
+	return usernameValid
+}
 
-	validateEmail() {
-		const {
-			email
-		} = this.state
-		const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		const emailValid = re.test(email)
-		LayoutAnimation.easeInEaseOut()
-		this.setState({
-			emailValid
-		})
-		emailValid || this.emailInput.shake()
-		return emailValid
-	}
+validateEmail() {
+	const {
+		email
+	} = this.state
+	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	const emailValid = re.test(email)
+	LayoutAnimation.easeInEaseOut()
+	this.setState({
+		emailValid
+	})
+	emailValid || this.emailInput.shake()
+	return emailValid
+}
 
-	validatePassword() {
-		const {
-			password
-		} = this.state
-		const passwordValid = password.length >= 8
-		LayoutAnimation.easeInEaseOut()
-		this.setState({
-			passwordValid
-		})
-		passwordValid || this.passwordInput.shake()
-		return passwordValid
-	}
+validatePassword() {
+	const {
+		password
+	} = this.state
+	const passwordValid = password.length >= 8
+	LayoutAnimation.easeInEaseOut()
+	this.setState({
+		passwordValid
+	})
+	passwordValid || this.passwordInput.shake()
+	return passwordValid
+}
 
-	validateConfirmationPassword() {
-		const {
-			password,
-			confirmationPassword
-		} = this.state
-		const confirmationPasswordValid = password === confirmationPassword
-		LayoutAnimation.easeInEaseOut()
-		this.setState({
-			confirmationPasswordValid
-		})
-		confirmationPasswordValid || this.confirmationPasswordInput.shake()
-		return confirmationPasswordValid
-	}
+validateConfirmationPassword() {
+	const {
+		password,
+		confirmationPassword
+	} = this.state
+	const confirmationPasswordValid = password === confirmationPassword
+	LayoutAnimation.easeInEaseOut()
+	this.setState({
+		confirmationPasswordValid
+	})
+	confirmationPasswordValid || this.confirmationPasswordInput.shake()
+	return confirmationPasswordValid
+}
 
-	setSelectedType = selectedType =>
-		LayoutAnimation.easeInEaseOut() || this.setState({
-			selectedType
-		})
+setSelectedType = selectedType =>
+	LayoutAnimation.easeInEaseOut() || this.setState({
+		selectedType
+	})
 
-	render() {
-		const {
-			isLoading,
-			selectedType,
-			confirmationPassword,
-			email,
-			emailValid,
-			password,
-			passwordValid,
-			confirmationPasswordValid,
-			username,
-			usernameValid,
-		} = this.state
+render() {
+	const {
+		isLoading,
+		selectedType,
+		confirmationPassword,
+		email,
+		emailValid,
+		password,
+		passwordValid,
+		confirmationPasswordValid,
+		username,
+		usernameValid,
+	} = this.state
 
-		return (
-			<KeyboardAwareScrollView
-				scrollEnabled={false}
-				contentContainerStyle={styles.container}
-			>
-				<Text style={styles.whoAreYouText}>WHO YOU ARE ?</Text>
-				<View style={styles.userTypesContainer}>
-					<UserTypeItem
-						label="COOL"
-						labelColor="#ECC841"
-						image={USER_COOL}
-						onPress={() => this.setSelectedType('parent')}
-						selected={selectedType === 'parent'}
-					/>
-					<UserTypeItem
-						label="STUDENT"
-						labelColor="#2CA75E"
-						image={USER_STUDENT}
-						onPress={() => this.setSelectedType('child')}
-						selected={selectedType === 'child'}
-					/>
-					<UserTypeItem
-						label="HARRY POTTER"
-						labelColor="#36717F"
-						image={USER_HP}
-						onPress={() => this.setSelectedType('teacher')}
-						selected={selectedType === 'teacher'}
-					/>
-				</View>
-				<View style={{ width: '80%', alignItems: 'center' }}>
-					<FormInput
-						refInput={input => (this.usernameInput = input)}
-						icon="user"
-						value={username}
-						onChangeText={username => this.setState({ username })}
-						placeholder="Username"
-						returnKeyType="next"
-						errorMessage={usernameValid ? null : 'Your username can\'t be blank'}
-						onSubmitEditing={() => {
-							this.validateUsername()
-							this.emailInput.focus()
-						}}
-					/>
-					<FormInput
-						refInput={input => (this.emailInput = input)}
-						icon="envelope"
-						value={email}
-						onChangeText={email => this.setState({ email })}
-						placeholder="Email"
-						keyboardType="email-address"
-						returnKeyType="next"
-						errorMessage={emailValid ? null : 'Please enter a valid email address'}
-						onSubmitEditing={() => {
-							this.validateEmail()
-							this.passwordInput.focus()
-						}}
-					/>
-					<FormInput
-						refInput={input => (this.passwordInput = input)}
-						icon="lock"
-						value={password}
-						onChangeText={password => this.setState({ password })}
-						placeholder="Password"
-						secureTextEntry
-						returnKeyType="next"
-						errorMessage={passwordValid ? null : 'Please enter at least 8 characters'}
-						onSubmitEditing={() => {
-							this.validatePassword()
-							this.confirmationPasswordInput.focus()
-						}}
-					/>
-					<FormInput
-						refInput={input => (this.confirmationPasswordInput = input)}
-						icon="lock"
-						value={confirmationPassword}
-						onChangeText={confirmationPassword =>
-							this.setState({ confirmationPassword })}
-						placeholder="Confirm Password"
-						secureTextEntry
-						errorMessage={confirmationPasswordValid ? null : 'The password fields are not identics'}
-						returnKeyType="go"
-						onSubmitEditing={() => {
-							this.validateConfirmationPassword()
-							this.signup()
-						}}
-					/>
-				</View>
-				<Button
-					ViewComponent={LinearGradient}
-					loading={isLoading}
-					title="SIGN UP"
-					containerStyle={{}}
-					buttonStyle={styles.signUpButton}
-					linearGradientProps={{
-						colors: ['#FF9800', '#F44336'],
-						start: { x: 1, y: 0 },
-						end: { x: 0.2, y: 0 },
-					}}
-					titleStyle={styles.signUpButtonText}
-					onPress={this.signup}
-					disabled={isLoading}
+	return (
+		<KeyboardAwareScrollView
+			scrollEnabled={false}
+			contentContainerStyle={styles.container}
+		>
+			<Text style={styles.whoAreYouText}>WHO YOU ARE ?</Text>
+			<View style={styles.userTypesContainer}>
+				<UserTypeItem
+					label="COOL"
+					labelColor="#ECC841"
+					image={USER_COOL}
+					onPress={() => this.setSelectedType('parent')}
+					selected={selectedType === 'parent'}
 				/>
-				<View style={styles.loginHereContainer}>
-					<Text style={styles.alreadyAccountText}>
-						Already have an account?
+				<UserTypeItem
+					label="STUDENT"
+					labelColor="#2CA75E"
+					image={USER_STUDENT}
+					onPress={() => this.setSelectedType('child')}
+					selected={selectedType === 'child'}
+				/>
+				<UserTypeItem
+					label="HARRY POTTER"
+					labelColor="#36717F"
+					image={USER_HP}
+					onPress={() => this.setSelectedType('teacher')}
+					selected={selectedType === 'teacher'}
+				/>
+			</View>
+			<View style={{ width: '80%', alignItems: 'center' }}>
+				<FormInput
+					refInput={input => (this.usernameInput = input)}
+					icon="user"
+					value={username}
+					onChangeText={username => this.setState({ username })}
+					placeholder="Username"
+					returnKeyType="next"
+					errorMessage={usernameValid ? null : 'Your username can\'t be blank'}
+					onSubmitEditing={() => {
+						this.validateUsername()
+						this.emailInput.focus()
+					}}
+				/>
+				<FormInput
+					refInput={input => (this.emailInput = input)}
+					icon="envelope"
+					value={email}
+					onChangeText={email => this.setState({ email })}
+					placeholder="Email"
+					keyboardType="email-address"
+					returnKeyType="next"
+					errorMessage={emailValid ? null : 'Please enter a valid email address'}
+					onSubmitEditing={() => {
+						this.validateEmail()
+						this.passwordInput.focus()
+					}}
+				/>
+				<FormInput
+					refInput={input => (this.passwordInput = input)}
+					icon="lock"
+					value={password}
+					onChangeText={password => this.setState({ password })}
+					placeholder="Password"
+					secureTextEntry
+					returnKeyType="next"
+					errorMessage={passwordValid ? null : 'Please enter at least 8 characters'}
+					onSubmitEditing={() => {
+						this.validatePassword()
+						this.confirmationPasswordInput.focus()
+					}}
+				/>
+				<FormInput
+					refInput={input => (this.confirmationPasswordInput = input)}
+					icon="lock"
+					value={confirmationPassword}
+					onChangeText={confirmationPassword =>
+						this.setState({ confirmationPassword })}
+					placeholder="Confirm Password"
+					secureTextEntry
+					errorMessage={confirmationPasswordValid ? null : 'The password fields are not identics'}
+					returnKeyType="go"
+					onSubmitEditing={() => {
+						this.validateConfirmationPassword()
+						this.signup()
+					}}
+				/>
+			</View>
+			<Button
+				ViewComponent={LinearGradient}
+				loading={isLoading}
+				title="SIGN UP"
+				containerStyle={{}}
+				buttonStyle={styles.signUpButton}
+				linearGradientProps={{
+					colors: ['#FF9800', '#F44336'],
+					start: { x: 1, y: 0 },
+					end: { x: 0.2, y: 0 },
+				}}
+				titleStyle={styles.signUpButtonText}
+				onPress={this.signup}
+				disabled={isLoading}
+			/>
+			<View style={styles.loginHereContainer}>
+				<Text style={styles.alreadyAccountText}>
+					Already have an account?
             		</Text>
-					<Button
-						title="Login here"
-						clear
-						titleStyle={styles.loginHereText}
-						containerStyle={{ backgroundColor: 'transparent', borderWidth: 0 }}
-						buttonStyle={{ backgroundColor: 'transparent', borderWidth: 0 }}
-						underlayColor="transparent"
-						onPress={() => this.props.navigation.navigate('Login')}
-					/>
-				</View>
-			</KeyboardAwareScrollView>
-		)
-	}
+				<Button
+					title="Log in here"
+					clear
+					titleStyle={styles.loginHereText}
+					containerStyle={{ backgroundColor: 'transparent', borderWidth: 0 }}
+					buttonStyle={{ backgroundColor: 'transparent', borderWidth: 0 }}
+					underlayColor="transparent"
+					onPress={() => this.props.navigation.navigate('Login')}
+				/>
+			</View>
+		</KeyboardAwareScrollView>
+	)
+}
 }
 
 export const UserTypeItem = props => {

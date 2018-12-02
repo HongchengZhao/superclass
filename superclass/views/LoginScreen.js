@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, AsyncStorage } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -9,6 +9,10 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../assets/images/bg_screen1.jpg');
 
 export default class LoginScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    header: null
+  })
+
   constructor(props) {
     super(props);
 
@@ -23,7 +27,7 @@ export default class LoginScreen extends Component {
   }
 
   async componentDidMount() {
-    
+
   }
 
   validateEmail(email) {
@@ -33,11 +37,14 @@ export default class LoginScreen extends Component {
   }
 
   submitLoginCredentials() {
+    /*
     const { showLoading } = this.state;
 
     this.setState({
       showLoading: !showLoading
     });
+    */
+    this.props.navigation.navigate('App');
   }
 
   render() {
@@ -49,96 +56,97 @@ export default class LoginScreen extends Component {
           source={BG_IMAGE}
           style={styles.bgImage}
         >
+
           <View style={styles.loginView}>
-              <View style={styles.loginTitle}>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={styles.travelText}>TRAVEL</Text>
-                  <Text style={styles.plusText}>+</Text>
-                </View>
-                <View style={{ marginTop: -10 }}>
-                  <Text style={styles.travelText}>LEISURE</Text>
-                </View>
+            <View style={styles.loginTitle}>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.travelText}>TRAVEL</Text>
+                <Text style={styles.plusText}>+</Text>
               </View>
-              <View style={styles.loginInput}>
-                <Input
-                  leftIcon={
-                    <Icon
-                      name='user'
-                      color='rgba(171, 189, 219, 1)'
-                      size={25}
-                    />
-                  }
-                  containerStyle={{ marginVertical: 10 }}
-                  onChangeText={email => this.setState({ email })}
-                  value={email}
-                  inputStyle={{ marginLeft: 10, color: 'white' }}
-                  keyboardAppearance="light"
-                  placeholder="Email"
-                  autoFocus={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  ref={input => this.emailInput = input}
-                  onSubmitEditing={() => {
-                    this.setState({ email_valid: this.validateEmail(email) });
-                    this.passwordInput.focus();
-                  }}
-                  blurOnSubmit={false}
-                  placeholderTextColor="white"
-                  errorStyle={{ textAlign: 'center', fontSize: 12 }}
-                  errorMessage={email_valid ? null : "Please enter a valid email address"}
-                />
-                <Input
-                  leftIcon={
-                    <Icon
-                      name='lock'
-                      color='rgba(171, 189, 219, 1)'
-                      size={25}
-                    />
-                  }
-                  containerStyle={{ marginVertical: 10 }}
-                  onChangeText={(password) => this.setState({ password })}
-                  value={password}
-                  inputStyle={{ marginLeft: 10, color: 'white' }}
-                  secureTextEntry={true}
-                  keyboardAppearance="light"
-                  placeholder="Password"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="default"
-                  returnKeyType="done"
-                  ref={input => this.passwordInput = input}
-                  blurOnSubmit={true}
-                  placeholderTextColor="white"
-                />
-              </View>
-              <Button
-                title='LOG IN'
-                activeOpacity={1}
-                underlayColor="transparent"
-                onPress={this.submitLoginCredentials.bind(this)}
-                loading={showLoading}
-                loadingProps={{ size: 'small', color: 'white' }}
-                disabled={!email_valid && password.length < 8}
-                buttonStyle={styles.loginBtn}
-                containerStyle={{ marginVertical: 10, backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: 30 }}
-                titleStyle={{ fontWeight: 'bold', color: 'white' }}
-              />
-              <View style={styles.footerView}>
-                <Text style={{ color: 'grey' }}>
-                  New here?
-              </Text>
-                <Button
-                  title="Create an Account"
-                  clear
-                  activeOpacity={0.5}
-                  titleStyle={{ color: 'white', fontSize: 15 }}
-                  containerStyle={{ marginTop: -10 }}
-                  onPress={() => this.props.navigation.navigate('Signup')}
-                />
+              <View style={{ marginTop: -10 }}>
+                <Text style={styles.travelText}>LEISURE</Text>
               </View>
             </View>
+            <View style={styles.loginInput}>
+              <Input
+                leftIcon={
+                  <Icon
+                    name='user'
+                    color='rgba(171, 189, 219, 1)'
+                    size={25}
+                  />
+                }
+                containerStyle={{ marginVertical: 10 }}
+                onChangeText={email => this.setState({ email })}
+                value={email}
+                inputStyle={{ marginLeft: 10, color: 'white' }}
+                keyboardAppearance="light"
+                placeholder="Email"
+                autoFocus={false}
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                returnKeyType="next"
+                ref={input => this.emailInput = input}
+                onSubmitEditing={() => {
+                  this.setState({ email_valid: this.validateEmail(email) });
+                  this.passwordInput.focus();
+                }}
+                blurOnSubmit={false}
+                placeholderTextColor="white"
+                errorStyle={{ textAlign: 'center', fontSize: 12 }}
+                errorMessage={email_valid ? null : "Please enter a valid email address"}
+              />
+              <Input
+                leftIcon={
+                  <Icon
+                    name='lock'
+                    color='rgba(171, 189, 219, 1)'
+                    size={25}
+                  />
+                }
+                containerStyle={{ marginVertical: 10 }}
+                onChangeText={(password) => this.setState({ password })}
+                value={password}
+                inputStyle={{ marginLeft: 10, color: 'white' }}
+                secureTextEntry={true}
+                keyboardAppearance="light"
+                placeholder="Password"
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="default"
+                returnKeyType="done"
+                ref={input => this.passwordInput = input}
+                blurOnSubmit={true}
+                placeholderTextColor="white"
+              />
+            </View>
+            <Button
+              title='LOG IN'
+              activeOpacity={1}
+              underlayColor="transparent"
+              onPress={this.submitLoginCredentials.bind(this)}
+              loading={showLoading}
+              loadingProps={{ size: 'small', color: 'white' }}
+              disabled={!email_valid && password.length < 8}
+              buttonStyle={styles.loginBtn}
+              containerStyle={{ marginVertical: 10, backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: 30 }}
+              titleStyle={{ fontWeight: 'bold', color: 'white' }}
+            />
+            <View style={styles.footerView}>
+              <Text style={{ color: 'grey' }}>
+                New here?
+              </Text>
+              <Button
+                title="Create an Account"
+                clear
+                activeOpacity={0.5}
+                titleStyle={{ color: 'white', fontSize: 15 }}
+                containerStyle={{ marginTop: -10 }}
+                onPress={() => this.props.navigation.navigate('Signup')}
+              />
+            </View>
+          </View>
         </ImageBackground>
       </View>
     );
