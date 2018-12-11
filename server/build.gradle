@@ -26,5 +26,8 @@ repositories {
 
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation 'net.sourceforge.htmlunit:htmlunit:2.33'
+	implementation 'com.google.code.gson:gson:2.8.5'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
