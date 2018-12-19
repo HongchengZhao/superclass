@@ -28,7 +28,7 @@
         <!--同样Mac用户：targetProject 为全路径-->
         <javaModelGenerator targetPackage="${modelPackage}" targetProject="${src_main_java}">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
-            <property name="enableSubPackages" value="true" />
+            <property name="enableSubPackages" value="false" />
             <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -50,15 +50,8 @@
         <!-- 配置表信息 -->
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
-        <table schema="superclass" tableName="user" domainObjectName="User">
-            <columnOverride column="user_id" property="userId" />
-            <columnOverride column="avatar_url" property="avatarUrl" />
-            <columnOverride column="edu_id" property="eduId" />
-            <columnOverride column="phone_number" property="phoneNumber" />
-            <columnOverride column="school_id" property="schoolId" />
-            <columnOverride column="is_teacher" property="isTeacher" />
-            <columnOverride column="current_year" property="currentYear" />
-            <columnOverride column="current_semester" property="currentSemester" />
+        <table catalog="superclass" tableName="%">
+            <property name="useActualColumnNames" value="false" />
         </table>
 
     </context>

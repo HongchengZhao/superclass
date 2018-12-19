@@ -10,7 +10,7 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface UserMapper {
     @Insert({
-        "insert into user (user_id, username, ",
+        "insert into superclass..user (user_id, username, ",
         "gender, avatar_url, ",
         "edu_id, phone_number, ",
         "school_id, password, ",
@@ -29,7 +29,7 @@ public interface UserMapper {
         "select",
         "user_id, username, gender, avatar_url, edu_id, phone_number, school_id, password, ",
         "real_name, is_teacher, current_year, current_semester",
-        "from user"
+        "from superclass..user"
     })
     @Results({
         @Result(column="user_id", property="userId", jdbcType=JdbcType.INTEGER),
