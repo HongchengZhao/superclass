@@ -32,7 +32,20 @@ export default class ClassGroupScreen extends Component {
       }}
       title={item.name}
       subtitle={item.latest_message}
-      containerStyle={{ padding: 5 }}
+      containerStyle={{padding: 5}}
+
+
+
+
+
+
+
+
+
+
+
+
+      
       onPress={() => this.props.navigation.navigate('GroupChat', {
         name: item.name
       })}
@@ -44,9 +57,10 @@ export default class ClassGroupScreen extends Component {
       <View style={{ flex: 1, backgroundColor: '#fafafa' }}>
 
         <StatusBar
-        barStyle='light-content'
-        backgroundColor='#f4511e'
+          barStyle='light-content'
+          backgroundColor='#2196F3'
         />
+
 
         <FlatList
           data={this.state.classList}

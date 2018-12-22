@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface TimeSlotMapper {
     @Delete({
-        "delete from superclass..time_slot",
+        "delete from time_slot",
         "where time_slot_id = #{timeSlotId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer timeSlotId);
 
     @Insert({
-        "insert into superclass..time_slot (time_slot_id, weekday, ",
+        "insert into time_slot (time_slot_id, weekday, ",
         "start_week, end_week, ",
         "start_time, end_time, ",
         "week_interval)",
@@ -32,7 +32,7 @@ public interface TimeSlotMapper {
     @Select({
         "select",
         "time_slot_id, weekday, start_week, end_week, start_time, end_time, week_interval",
-        "from superclass..time_slot",
+        "from time_slot",
         "where time_slot_id = #{timeSlotId,jdbcType=INTEGER}"
     })
     @Results({
@@ -49,7 +49,7 @@ public interface TimeSlotMapper {
     @Select({
         "select",
         "time_slot_id, weekday, start_week, end_week, start_time, end_time, week_interval",
-        "from superclass..time_slot"
+        "from time_slot"
     })
     @Results({
         @Result(column="time_slot_id", property="timeSlotId", jdbcType=JdbcType.INTEGER, id=true),
@@ -63,7 +63,7 @@ public interface TimeSlotMapper {
     List<TimeSlot> selectAll();
 
     @Update({
-        "update superclass..time_slot",
+        "update time_slot",
         "set weekday = #{weekday,jdbcType=INTEGER},",
           "start_week = #{startWeek,jdbcType=INTEGER},",
           "end_week = #{endWeek,jdbcType=INTEGER},",

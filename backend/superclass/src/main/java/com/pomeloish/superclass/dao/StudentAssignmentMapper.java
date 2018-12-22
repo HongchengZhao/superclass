@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface StudentAssignmentMapper {
     @Delete({
-        "delete from superclass..student_assignment",
+        "delete from student_assignment",
         "where uploaded_id = #{uploadedId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer uploadedId);
 
     @Insert({
-        "insert into superclass..student_assignment (uploaded_id, assignment_id, ",
+        "insert into student_assignment (uploaded_id, assignment_id, ",
         "file_path, grade, ",
         "user_id)",
         "values (#{uploadedId,jdbcType=INTEGER}, #{assignmentId,jdbcType=INTEGER}, ",
@@ -30,7 +30,7 @@ public interface StudentAssignmentMapper {
     @Select({
         "select",
         "uploaded_id, assignment_id, file_path, grade, user_id",
-        "from superclass..student_assignment",
+        "from student_assignment",
         "where uploaded_id = #{uploadedId,jdbcType=INTEGER}"
     })
     @Results({
@@ -45,7 +45,7 @@ public interface StudentAssignmentMapper {
     @Select({
         "select",
         "uploaded_id, assignment_id, file_path, grade, user_id",
-        "from superclass..student_assignment"
+        "from student_assignment"
     })
     @Results({
         @Result(column="uploaded_id", property="uploadedId", jdbcType=JdbcType.INTEGER, id=true),
@@ -57,7 +57,7 @@ public interface StudentAssignmentMapper {
     List<StudentAssignment> selectAll();
 
     @Update({
-        "update superclass..student_assignment",
+        "update student_assignment",
         "set assignment_id = #{assignmentId,jdbcType=INTEGER},",
           "file_path = #{filePath,jdbcType=VARCHAR},",
           "grade = #{grade,jdbcType=INTEGER},",

@@ -13,16 +13,16 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface CourseMapper {
     @Delete({
-        "delete from superclass..course",
-        "where course_id = #{courseId,jdbcType=INTEGER}",
+        "delete from course",
+        "where course_id = #{courseId,jdbcType=VARCHAR}",
           "and school_id = #{schoolId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(@Param("courseId") Integer courseId, @Param("schoolId") Integer schoolId);
+    int deleteByPrimaryKey(@Param("courseId") String courseId, @Param("schoolId") Integer schoolId);
 
     @Insert({
-        "insert into superclass..course (course_id, school_id, ",
+        "insert into course (course_id, school_id, ",
         "course_name, teacher_name)",
-        "values (#{courseId,jdbcType=INTEGER}, #{schoolId,jdbcType=INTEGER}, ",
+        "values (#{courseId,jdbcType=VARCHAR}, #{schoolId,jdbcType=INTEGER}, ",
         "#{courseName,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR})"
     })
     int insert(Course record);
@@ -30,25 +30,25 @@ public interface CourseMapper {
     @Select({
         "select",
         "course_id, school_id, course_name, teacher_name",
-        "from superclass..course",
-        "where course_id = #{courseId,jdbcType=INTEGER}",
+        "from course",
+        "where course_id = #{courseId,jdbcType=VARCHAR}",
           "and school_id = #{schoolId,jdbcType=INTEGER}"
     })
     @Results({
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="course_id", property="courseId", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="school_id", property="schoolId", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="course_name", property="courseName", jdbcType=JdbcType.VARCHAR),
         @Result(column="teacher_name", property="teacherName", jdbcType=JdbcType.VARCHAR)
     })
-    Course selectByPrimaryKey(@Param("courseId") Integer courseId, @Param("schoolId") Integer schoolId);
+    Course selectByPrimaryKey(@Param("courseId") String courseId, @Param("schoolId") Integer schoolId);
 
     @Select({
         "select",
         "course_id, school_id, course_name, teacher_name",
-        "from superclass..course"
+        "from course"
     })
     @Results({
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="course_id", property="courseId", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="school_id", property="schoolId", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="course_name", property="courseName", jdbcType=JdbcType.VARCHAR),
         @Result(column="teacher_name", property="teacherName", jdbcType=JdbcType.VARCHAR)
@@ -56,10 +56,10 @@ public interface CourseMapper {
     List<Course> selectAll();
 
     @Update({
-        "update superclass..course",
+        "update course",
         "set course_name = #{courseName,jdbcType=VARCHAR},",
           "teacher_name = #{teacherName,jdbcType=VARCHAR}",
-        "where course_id = #{courseId,jdbcType=INTEGER}",
+        "where course_id = #{courseId,jdbcType=VARCHAR}",
           "and school_id = #{schoolId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Course record);

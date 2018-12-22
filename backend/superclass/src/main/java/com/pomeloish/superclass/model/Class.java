@@ -6,7 +6,7 @@ import java.util.Date;
 public class Class implements Serializable {
     private Integer classId;
 
-    private Integer courseId;
+    private String courseId;
 
     private Integer schoolId;
 
@@ -28,12 +28,12 @@ public class Class implements Serializable {
         this.classId = classId;
     }
 
-    public Integer getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId == null ? null : courseId.trim();
     }
 
     public Integer getSchoolId() {

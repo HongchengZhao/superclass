@@ -3,7 +3,7 @@ package com.pomeloish.superclass.model;
 import java.io.Serializable;
 
 public class Course implements Serializable {
-    private Integer courseId;
+    private String courseId;
 
     private Integer schoolId;
 
@@ -13,12 +13,12 @@ public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getCourseId() {
+    public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId == null ? null : courseId.trim();
     }
 
     public Integer getSchoolId() {

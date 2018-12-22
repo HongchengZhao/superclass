@@ -57,11 +57,13 @@ export default class ClassDetailScreen extends Component {
           title='Assignment'
           leftIcon={{ name: 'file-text-o', type: 'font-awesome', color: '#999'}}
           containerStyle={styles.action}
+          onPress={()=>this.props.navigation.navigate('Assignment')}
           />
           <ListItem
           title='Sign in'
           leftIcon={{ name: 'pencil-square-o', type: 'font-awesome', color: '#999'}}
           containerStyle={styles.action}
+          onPress={()=>this.props.navigation.navigate('RollCall')}
           />
         </View>
       </ScrollView>

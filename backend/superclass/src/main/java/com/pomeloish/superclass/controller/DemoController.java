@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
     @RequestMapping(value="/echo")
     public String echo(@RequestParam(value="request", defaultValue = "Hello World!") String request){
-        return FetchTimetable.homePage("1652738","zhczhc574rinn");
+        //return FetchTimetable.homePage("1652738","zhczhc574rinn");
+        return request;
     }
 }
