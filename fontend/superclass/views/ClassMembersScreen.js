@@ -35,11 +35,11 @@ export default class ClassMembersScreen extends Component {
       <ListItem
         key={item._id}
         leftAvatar={{
-          size: smallScreen ? 'medium' : 'small',
-          source: {
-            uri: item.avatar_url,
-            cache: 'force-cache'
-          },
+          size: 'medium',
+          title: item.name[0],
+          placeholderStyle: { backgroundColor: 'red' },
+          titleStyle: { lineHeight: 50 },
+          source: { uri: item.avatar_url, cache: 'force-cache' },
           ImageComponent: () => <Image />
         }}
         title={item.name}
@@ -48,7 +48,8 @@ export default class ClassMembersScreen extends Component {
         containerStyle={smallScreen ? styles.smallScreenItem : null}
       />)
   }
-
+  /*
+  item.avatar_url && */
   render() {
     let smallScreen = this.props.smallScreen
 
@@ -67,7 +68,7 @@ export default class ClassMembersScreen extends Component {
             keyExtractor={this._keyExtractor}
             ItemSeparatorComponent={() => <Divider style={{ backgroundColor: '#eee' }} />}
           /> :
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap'}} >
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }} >
             {teachers.map((item) => this._renderItem({ item }))}
             {students.map((item) => this._renderItem({ item }))}
           </View>
@@ -94,7 +95,7 @@ const students = [
   {
     _id: 4,
     name: 'yuzu',
-    avatar_url: 'http://www.jituwang.com/uploads/allimg/150922/258230-150922221K447.jpg'
+    avatar_url: null
   },
   {
     _id: 4,
