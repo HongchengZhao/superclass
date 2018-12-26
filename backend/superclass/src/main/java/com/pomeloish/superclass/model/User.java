@@ -14,7 +14,7 @@ public class User implements Serializable {
 
     private Integer eduId;
 
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     private Integer schoolId;
 
@@ -70,12 +70,12 @@ public class User implements Serializable {
         this.eduId = eduId;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public Integer getSchoolId() {

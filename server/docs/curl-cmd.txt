@@ -1,0 +1,10 @@
+# Add new user
+curl -i -H "Content-Type: application/json" -X POST -d @addUser.json localhost:8080/api/users
+
+# Get user by id = 1
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/api/users/4
+
+# Get all users
+curl -i -H "Content-Type: application/json" -X GET localhost:8080/api/users
+
+curl -i -H "Content-Type: application/json" localhost:8080/echo?request=superclass

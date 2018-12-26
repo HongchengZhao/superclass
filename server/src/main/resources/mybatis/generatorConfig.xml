@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!--自动实现Serializable接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库基本信息-->
+        <jdbcConnection driverClass="${driverClass}"
+                        connectionURL="${connectionURL}"
+                        userId="${userId}"
+                        password="${password}"
+        />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--生成实体类的位置以及包的名字-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <javaModelGenerator targetPackage="${modelPackage}" targetProject="${src_main_java}">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--生成映射文件存放位置-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="${src_main_resources}">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置,mapper接口生成的位置-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <javaClientGenerator targetPackage="${mapperPackage}" targetProject="${src_main_java}" type="ANNOTATEDMAPPER">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+        <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
+            是否生成 example类 -->
+        <table catalog="superclass" delimitIdentifiers="false" tableName="%">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+        </table>
+
+        <table tableName="user">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>
