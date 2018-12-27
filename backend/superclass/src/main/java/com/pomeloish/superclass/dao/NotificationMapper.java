@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface NotificationMapper {
     @Delete({
-        "delete from notification",
+        "delete from superclass..notification",
         "where notification_id = #{notificationId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer notificationId);
 
     @Insert({
-        "insert into notification (notification_id, class_id, ",
+        "insert into superclass..notification (notification_id, class_id, ",
         "notification)",
         "values (#{notificationId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, ",
         "#{notification,jdbcType=LONGVARCHAR})"
@@ -28,7 +28,7 @@ public interface NotificationMapper {
     @Select({
         "select",
         "notification_id, class_id, notification",
-        "from notification",
+        "from superclass..notification",
         "where notification_id = #{notificationId,jdbcType=INTEGER}"
     })
     @Results({
@@ -41,7 +41,7 @@ public interface NotificationMapper {
     @Select({
         "select",
         "notification_id, class_id, notification",
-        "from notification"
+        "from superclass..notification"
     })
     @Results({
         @Result(column="notification_id", property="notificationId", jdbcType=JdbcType.INTEGER, id=true),
@@ -51,7 +51,7 @@ public interface NotificationMapper {
     List<Notification> selectAll();
 
     @Update({
-        "update notification",
+        "update superclass..notification",
         "set class_id = #{classId,jdbcType=INTEGER},",
           "notification = #{notification,jdbcType=LONGVARCHAR}",
         "where notification_id = #{notificationId,jdbcType=INTEGER}"

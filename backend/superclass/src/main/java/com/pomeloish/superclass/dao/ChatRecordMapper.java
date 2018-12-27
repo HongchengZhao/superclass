@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface ChatRecordMapper {
     @Delete({
-        "delete from chat_record",
+        "delete from superclass..chat_record",
         "where message_id = #{messageId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer messageId);
 
     @Insert({
-        "insert into chat_record (message_id, class_id, ",
+        "insert into superclass..chat_record (message_id, class_id, ",
         "user_id, message_type, ",
         "send_time, message_content)",
         "values (#{messageId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, ",
@@ -30,7 +30,7 @@ public interface ChatRecordMapper {
     @Select({
         "select",
         "message_id, class_id, user_id, message_type, send_time, message_content",
-        "from chat_record",
+        "from superclass..chat_record",
         "where message_id = #{messageId,jdbcType=INTEGER}"
     })
     @Results({
@@ -46,7 +46,7 @@ public interface ChatRecordMapper {
     @Select({
         "select",
         "message_id, class_id, user_id, message_type, send_time, message_content",
-        "from chat_record"
+        "from superclass..chat_record"
     })
     @Results({
         @Result(column="message_id", property="messageId", jdbcType=JdbcType.INTEGER, id=true),
@@ -59,7 +59,7 @@ public interface ChatRecordMapper {
     List<ChatRecord> selectAll();
 
     @Update({
-        "update chat_record",
+        "update superclass..chat_record",
         "set class_id = #{classId,jdbcType=INTEGER},",
           "user_id = #{userId,jdbcType=INTEGER},",
           "message_type = #{messageType,jdbcType=INTEGER},",

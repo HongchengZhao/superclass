@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.net.URL;
 
+
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
@@ -15,7 +16,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+
 import org.w3c.dom.Node;
+
+import com.pomeloish.superclass.dao.CourseMapper;
+import com.pomeloish.superclass.model.Course;
+import com.pomeloish.superclass.service.CourseServiceImpl;
+import com.pomeloish.superclass.model.TimeSlot;
+import com.pomeloish.superclass.dao.TimeSlotMapper;
+import com.pomeloish.superclass.service.TimeSlotService;
 
 public class FetchTimetable {
 
@@ -96,6 +105,13 @@ public class FetchTimetable {
         DomNode teacherNameNode = courseInfo.get(7);
         String teacherName = teacherNameNode.getTextContent();
 
+
+        //将从页面解析得到的courseInfo存入数据库中
+        int school_id=1;                //暂时只针对同济大学获取课表信息，school_id为1
+        Course course1=new Course(courseId,school_id,courseName,teacherName);
+        new CourseServiceImpl().insert(course1);
+
+        //得到courseInfo后需进一步分析以获取详细的上课信息classInfo
         DomNode classInfoNode = courseInfo.get(8);
         ArrayList<DomNode> classInfoList = (ArrayList<DomNode>)classInfoNode.getChildNodes();
         for (DomNode classInfo : classInfoList){
@@ -107,6 +123,8 @@ public class FetchTimetable {
     }
 
     private static void getClassInfo(DomNode classInfo){
+
+        //下面的其实是TimeSlot的信息
         String[] classDetails = classInfo.getTextContent().split(" ");
 
         int weekday = WeekDay.getIndexOf(classDetails[1]);
@@ -127,9 +145,25 @@ public class FetchTimetable {
         int startWeek = Integer.parseInt(weekSpan[0]);
         int endWeek = Integer.parseInt(weekSpan[1]);
 
+        //向数据库中插入timeSlot的信息
+        int timeSlotId=1;
+        //只有当timeSlot的信息不完全一样的时候再存入数据库，并且每当有新的timeSlotId存入，其值自动加1
+        TimeSlot timeSlot = new TimeSlot(timeSlotId, weekday, startWeek, endWeek, startTime, endTime, weekInterval);
+        new TimeSlotServiceImpl().insert(timeSlot);
+
+        //数据库中已经有了有了Course，TimeSlot的信息，再保存class的信息即可
+
         String classRoom = classDetails[4];
 
         // 操作数据库
+        //与将courseInfo保存到数据库操作一样
+        //但是要比对class的上课时间表与TimeSlot数据库中已有的数据，以确定class的timeSlotId值
+        //以及对应的课程信息也要查询Course表，以确定Course的具体CourseId值
+
+        //  假装是一个函数
+         new    TimeSlotServiceImpl().selectAll()
+
+
     }
 }
 

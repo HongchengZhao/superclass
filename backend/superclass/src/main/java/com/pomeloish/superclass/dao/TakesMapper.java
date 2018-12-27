@@ -12,14 +12,14 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface TakesMapper {
     @Delete({
-        "delete from takes",
+        "delete from superclass..takes",
         "where user_id = #{userId,jdbcType=INTEGER}",
           "and class_id = #{classId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(@Param("userId") Integer userId, @Param("classId") Integer classId);
 
     @Insert({
-        "insert into takes (user_id, class_id)",
+        "insert into superclass..takes (user_id, class_id)",
         "values (#{userId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER})"
     })
     int insert(Takes record);
@@ -27,7 +27,7 @@ public interface TakesMapper {
     @Select({
         "select",
         "user_id, class_id",
-        "from takes"
+        "from superclass..takes"
     })
     @Results({
         @Result(column="user_id", property="userId", jdbcType=JdbcType.INTEGER, id=true),

@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface RollCallMapper {
     @Delete({
-        "delete from roll_call",
+        "delete from superclass..roll_call",
         "where signin_id = #{signinId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer signinId);
 
     @Insert({
-        "insert into roll_call (signin_id, class_id, ",
+        "insert into superclass..roll_call (signin_id, class_id, ",
         "date, longtitude, latitude)",
         "values (#{signinId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, ",
         "#{date,jdbcType=DATE}, #{longtitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE})"
@@ -28,7 +28,7 @@ public interface RollCallMapper {
     @Select({
         "select",
         "signin_id, class_id, date, longtitude, latitude",
-        "from roll_call",
+        "from superclass..roll_call",
         "where signin_id = #{signinId,jdbcType=INTEGER}"
     })
     @Results({
@@ -43,7 +43,7 @@ public interface RollCallMapper {
     @Select({
         "select",
         "signin_id, class_id, date, longtitude, latitude",
-        "from roll_call"
+        "from superclass..roll_call"
     })
     @Results({
         @Result(column="signin_id", property="signinId", jdbcType=JdbcType.INTEGER, id=true),
@@ -55,7 +55,7 @@ public interface RollCallMapper {
     List<RollCall> selectAll();
 
     @Update({
-        "update roll_call",
+        "update superclass..roll_call",
         "set class_id = #{classId,jdbcType=INTEGER},",
           "date = #{date,jdbcType=DATE},",
           "longtitude = #{longtitude,jdbcType=DOUBLE},",

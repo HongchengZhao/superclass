@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface TeacherAssignmentMapper {
     @Delete({
-        "delete from teacher_assignment",
+        "delete from superclass..teacher_assignment",
         "where assignment_id = #{assignmentId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer assignmentId);
 
     @Insert({
-        "insert into teacher_assignment (assignment_id, class_id, ",
+        "insert into superclass..teacher_assignment (assignment_id, class_id, ",
         "title, deadline, ",
         "content)",
         "values (#{assignmentId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, ",
@@ -30,7 +30,7 @@ public interface TeacherAssignmentMapper {
     @Select({
         "select",
         "assignment_id, class_id, title, deadline, content",
-        "from teacher_assignment",
+        "from superclass..teacher_assignment",
         "where assignment_id = #{assignmentId,jdbcType=INTEGER}"
     })
     @Results({
@@ -45,7 +45,7 @@ public interface TeacherAssignmentMapper {
     @Select({
         "select",
         "assignment_id, class_id, title, deadline, content",
-        "from teacher_assignment"
+        "from superclass..teacher_assignment"
     })
     @Results({
         @Result(column="assignment_id", property="assignmentId", jdbcType=JdbcType.INTEGER, id=true),
@@ -57,7 +57,7 @@ public interface TeacherAssignmentMapper {
     List<TeacherAssignment> selectAll();
 
     @Update({
-        "update teacher_assignment",
+        "update superclass..teacher_assignment",
         "set class_id = #{classId,jdbcType=INTEGER},",
           "title = #{title,jdbcType=VARCHAR},",
           "deadline = #{deadline,jdbcType=VARCHAR},",

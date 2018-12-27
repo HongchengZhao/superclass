@@ -12,14 +12,14 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface SigninRecordMapper {
     @Delete({
-        "delete from signin_record",
+        "delete from superclass..signin_record",
         "where user_id = #{userId,jdbcType=INTEGER}",
           "and signin_id = #{signinId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(@Param("userId") Integer userId, @Param("signinId") Integer signinId);
 
     @Insert({
-        "insert into signin_record (user_id, signin_id)",
+        "insert into superclass..signin_record (user_id, signin_id)",
         "values (#{userId,jdbcType=INTEGER}, #{signinId,jdbcType=INTEGER})"
     })
     int insert(SigninRecord record);
@@ -27,7 +27,7 @@ public interface SigninRecordMapper {
     @Select({
         "select",
         "user_id, signin_id",
-        "from signin_record"
+        "from superclass..signin_record"
     })
     @Results({
         @Result(column="user_id", property="userId", jdbcType=JdbcType.INTEGER, id=true),

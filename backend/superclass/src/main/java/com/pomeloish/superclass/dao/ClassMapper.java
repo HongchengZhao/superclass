@@ -2,18 +2,13 @@ package com.pomeloish.superclass.dao;
 
 import com.pomeloish.superclass.model.Class;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
+@Mapper
 public interface ClassMapper {
     @Delete({
-        "delete from class",
+        "delete from superclass..class",
         "where class_id = #{classId,jdbcType=INTEGER}",
           "and course_id = #{courseId,jdbcType=VARCHAR}",
           "and school_id = #{schoolId,jdbcType=INTEGER}"
@@ -21,7 +16,7 @@ public interface ClassMapper {
     int deleteByPrimaryKey(@Param("classId") Integer classId, @Param("courseId") String courseId, @Param("schoolId") Integer schoolId);
 
     @Insert({
-        "insert into class (class_id, course_id, ",
+        "insert into superclass..class (class_id, course_id, ",
         "school_id, classroom, ",
         "time_slot_id, semester, ",
         "year)",
@@ -35,7 +30,7 @@ public interface ClassMapper {
     @Select({
         "select",
         "class_id, course_id, school_id, classroom, time_slot_id, semester, year",
-        "from class",
+        "from superclass..class",
         "where class_id = #{classId,jdbcType=INTEGER}",
           "and course_id = #{courseId,jdbcType=VARCHAR}",
           "and school_id = #{schoolId,jdbcType=INTEGER}"
@@ -54,7 +49,7 @@ public interface ClassMapper {
     @Select({
         "select",
         "class_id, course_id, school_id, classroom, time_slot_id, semester, year",
-        "from class"
+        "from superclass..class"
     })
     @Results({
         @Result(column="class_id", property="classId", jdbcType=JdbcType.INTEGER, id=true),
@@ -68,7 +63,7 @@ public interface ClassMapper {
     List<Class> selectAll();
 
     @Update({
-        "update class",
+        "update superclass..class",
         "set classroom = #{classroom,jdbcType=VARCHAR},",
           "time_slot_id = #{timeSlotId,jdbcType=INTEGER},",
           "semester = #{semester,jdbcType=TINYINT},",

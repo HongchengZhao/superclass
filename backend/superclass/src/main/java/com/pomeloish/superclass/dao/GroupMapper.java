@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface GroupMapper {
     @Delete({
-        "delete from group",
+        "delete from superclass..group",
         "where class_id = #{classId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer classId);
 
     @Insert({
-        "insert into group (class_id, group_name)",
+        "insert into superclass..group (class_id, group_name)",
         "values (#{classId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR})"
     })
     int insert(Group record);
@@ -26,7 +26,7 @@ public interface GroupMapper {
     @Select({
         "select",
         "class_id, group_name",
-        "from group",
+        "from superclass..group",
         "where class_id = #{classId,jdbcType=INTEGER}"
     })
     @Results({
@@ -38,7 +38,7 @@ public interface GroupMapper {
     @Select({
         "select",
         "class_id, group_name",
-        "from group"
+        "from superclass..group"
     })
     @Results({
         @Result(column="class_id", property="classId", jdbcType=JdbcType.INTEGER, id=true),
@@ -47,7 +47,7 @@ public interface GroupMapper {
     List<Group> selectAll();
 
     @Update({
-        "update group",
+        "update superclass..group",
         "set group_name = #{groupName,jdbcType=VARCHAR}",
         "where class_id = #{classId,jdbcType=INTEGER}"
     })

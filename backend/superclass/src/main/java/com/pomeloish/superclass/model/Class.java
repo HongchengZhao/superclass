@@ -19,6 +19,16 @@ public class Class implements Serializable {
     private Date year;
 
     private static final long serialVersionUID = 1L;
+    public Class(Integer classId,String courseId,Integer schoolId,String classroom,Integer timeSlotId,Byte semester,Date year)
+    {
+        this.classId=classId;
+        this.courseId=courseId;
+        this.schoolId=schoolId;
+        this.classroom=classroom;
+        this.timeSlotId=timeSlotId;
+        this.semester=semester;
+        this.year=year;
+    }
 
     public Integer getClassId() {
         return classId;

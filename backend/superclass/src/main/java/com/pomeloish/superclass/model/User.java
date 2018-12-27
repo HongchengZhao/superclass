@@ -6,6 +6,8 @@ import java.util.Date;
 public class User implements Serializable {
     private Integer userId;
 
+    private String phoneNumber;
+
     private String username;
 
     private String gender;
@@ -13,8 +15,6 @@ public class User implements Serializable {
     private String avatarUrl;
 
     private Integer eduId;
-
-    private String phoneNumber;
 
     private Integer schoolId;
 
@@ -36,6 +36,14 @@ public class User implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public String getUsername() {
@@ -68,14 +76,6 @@ public class User implements Serializable {
 
     public void setEduId(Integer eduId) {
         this.eduId = eduId;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public Integer getSchoolId() {
