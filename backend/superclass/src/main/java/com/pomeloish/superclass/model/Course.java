@@ -12,12 +12,6 @@ public class Course implements Serializable {
     private String teacherName;
 
     private static final long serialVersionUID = 1L;
-    public Course(String courseId,Integer schoolId,String courseName,String teacherName){
-        this.courseId=courseId;
-        this.schoolId=schoolId;
-        this.courseName=courseName;
-        this.teacherName=teacherName;
-    }
 
     public String getCourseId() {
         return courseId;

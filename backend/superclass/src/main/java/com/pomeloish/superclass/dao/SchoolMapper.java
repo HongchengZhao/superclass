@@ -12,13 +12,13 @@ import org.apache.ibatis.type.JdbcType;
 
 public interface SchoolMapper {
     @Delete({
-        "delete from superclass..school",
+        "delete from school",
         "where school_id = #{schoolId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer schoolId);
 
     @Insert({
-        "insert into superclass..school (school_id, school_name)",
+        "insert into school (school_id, school_name)",
         "values (#{schoolId,jdbcType=INTEGER}, #{schoolName,jdbcType=VARCHAR})"
     })
     int insert(School record);
@@ -26,7 +26,7 @@ public interface SchoolMapper {
     @Select({
         "select",
         "school_id, school_name",
-        "from superclass..school",
+        "from school",
         "where school_id = #{schoolId,jdbcType=INTEGER}"
     })
     @Results({
@@ -38,7 +38,7 @@ public interface SchoolMapper {
     @Select({
         "select",
         "school_id, school_name",
-        "from superclass..school"
+        "from school"
     })
     @Results({
         @Result(column="school_id", property="schoolId", jdbcType=JdbcType.INTEGER, id=true),
@@ -47,7 +47,7 @@ public interface SchoolMapper {
     List<School> selectAll();
 
     @Update({
-        "update superclass..school",
+        "update school",
         "set school_name = #{schoolName,jdbcType=VARCHAR}",
         "where school_id = #{schoolId,jdbcType=INTEGER}"
     })

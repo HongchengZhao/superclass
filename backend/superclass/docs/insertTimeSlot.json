@@ -1,0 +1,9 @@
+{
+  "timeSlotId": "1",
+  "weekday": "3",
+  "startWeek": "1",
+  "endWeek": "17",
+  "startTime": "5",
+  "endTime": "6",
+  "weekInterval": "0"
+}

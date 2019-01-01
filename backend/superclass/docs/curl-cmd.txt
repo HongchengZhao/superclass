@@ -8,3 +8,6 @@ curl -i -H "Content-Type: application/json" -X GET localhost:8080/api/users/4
 curl -i -H "Content-Type: application/json" -X GET localhost:8080/api/users
 
 curl -i -H "Content-Type: application/json" localhost:8080/echo?request=superclass
+
+#Add new course
+curl -i -H "Content-Type: application/json" -X POST -d @insertCourse.json localhost:8080/api/course

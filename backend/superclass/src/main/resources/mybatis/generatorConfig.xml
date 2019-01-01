@@ -55,7 +55,18 @@
             <property name="ignoreQualifiersAtRuntime" value="true" />
         </table>
 
-
+        <table tableName="user">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="timeSlot">
+            <generatedKey column="timeSlot_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="class">
+            <generatedKey column="class_id" sqlStatement="MySql" identity="true" />
+        </table>
+        <table tableName="course">
+            <generatedKey column="course_id" sqlStatement="MySql" identity="true" />
+        </table>
 
     </context>
 </generatorConfiguration>

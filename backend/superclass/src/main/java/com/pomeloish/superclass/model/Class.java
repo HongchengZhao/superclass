@@ -6,9 +6,9 @@ import java.util.Date;
 public class Class implements Serializable {
     private Integer classId;
 
-    private String courseId;
-
     private Integer schoolId;
+
+    private String courseId;
 
     private String classroom;
 
@@ -19,16 +19,6 @@ public class Class implements Serializable {
     private Date year;
 
     private static final long serialVersionUID = 1L;
-    public Class(Integer classId,String courseId,Integer schoolId,String classroom,Integer timeSlotId,Byte semester,Date year)
-    {
-        this.classId=classId;
-        this.courseId=courseId;
-        this.schoolId=schoolId;
-        this.classroom=classroom;
-        this.timeSlotId=timeSlotId;
-        this.semester=semester;
-        this.year=year;
-    }
 
     public Integer getClassId() {
         return classId;
@@ -38,20 +28,20 @@ public class Class implements Serializable {
         this.classId = classId;
     }
 
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId == null ? null : courseId.trim();
-    }
-
     public Integer getSchoolId() {
         return schoolId;
     }
 
     public void setSchoolId(Integer schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId == null ? null : courseId.trim();
     }
 
     public String getClassroom() {

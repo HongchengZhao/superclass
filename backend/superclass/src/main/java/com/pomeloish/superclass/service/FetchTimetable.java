@@ -3,6 +3,8 @@ package com.pomeloish.superclass.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.net.URL;
+import java.util.Date;
+import java.util.List;
 
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -17,6 +19,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 
+import com.pomeloish.superclass.model.Class;
 import org.w3c.dom.Node;
 
 import com.pomeloish.superclass.dao.CourseMapper;
@@ -107,64 +110,94 @@ public class FetchTimetable {
 
 
         //将从页面解析得到的courseInfo存入数据库中
-        int school_id=1;                //暂时只针对同济大学获取课表信息，school_id为1
-        Course course1=new Course(courseId,school_id,courseName,teacherName);
+        int schoolId=1;                //暂时只针对同济大学获取课表信息，school_id为1
+        Course course1=new Course(courseId,schoolId,courseName,teacherName);
         new CourseServiceImpl().insert(course1);
+
 
         //得到courseInfo后需进一步分析以获取详细的上课信息classInfo
         DomNode classInfoNode = courseInfo.get(8);
         ArrayList<DomNode> classInfoList = (ArrayList<DomNode>)classInfoNode.getChildNodes();
-        for (DomNode classInfo : classInfoList){
+        for (DomNode classInfo : classInfoList) {
             if (classInfo.getNodeType() == Node.TEXT_NODE)
-                getClassInfo(classInfo);
+            //下面的其实是TimeSlot的信息
+            {
+                String[] classDetails = classInfo.getTextContent().split(" ");
+
+                int weekday = WeekDay.getIndexOf(classDetails[1]);
+
+                String[] classSpan = classDetails[2].split("-");
+                int startTime = Integer.parseInt(classSpan[0]);
+                int endTime = Integer.parseInt(classSpan[1]);
+
+                int weekInterval = 0;
+                String weekTime;
+                if (classDetails[3].charAt(0) != '[') {
+                    weekInterval = 1;
+                    weekTime = classDetails[3].substring(2, classDetails[3].length() - 2);
+                } else {
+                    weekTime = classDetails[3].substring(1, classDetails[3].length() - 1);
+                }
+                String[] weekSpan = weekTime.split("-");
+                int startWeek = Integer.parseInt(weekSpan[0]);
+                int endWeek = Integer.parseInt(weekSpan[1]);
+
+                //与将courseInfo保存到数据库操作一样
+                //向数据库中插入timeSlot的信息
+                int timeSlotId = 1;
+                //只有当timeSlot的信息不完全一样的时候再存入数据库，并且每当有新的timeSlotId存入，其值自动加1
+                TimeSlot timeSlot = new TimeSlot(timeSlotId, weekday, startWeek, endWeek, startTime, endTime, weekInterval);
+                new TimeSlotServiceImpl().insert(timeSlot);
+
+                //数据库中已经有了有了Course，TimeSlot的信息，再保存class的信息即可
+                String classRoom = classDetails[4];
+
+                // 操作数据库
+
+                //  假装是一个函数，
+                //为了获得某一class的courseId需要比对数据库中的courseName、teacherName，以确定该class的具体courseId
+                List<Course> ClassCourse = new CourseServiceImpl().selectAll();
+                for (int i = 0; i < ClassCourse.size(); i++) {
+                    if (courseName == ClassCourse.get(i).getCourseName() &&
+                            teacherName == ClassCourse.get(i).getTeacherName()) {
+                        courseId = ClassCourse.get(i).getCourseId();
+                    }
+                }
+                //在数据库中找到符合该class的课程时间，以确定class的具体timeSlotId
+                List<TimeSlot> ClassTimeSlot = new TimeSlotServiceImpl().selectAll();
+                for (int i = 0; i < ClassTimeSlot.size(); i++) {
+                    if (weekday == ClassTimeSlot.get(i).getWeekday() &&
+                            startTime == ClassTimeSlot.get(i).getStartTime() &&
+                            endTime == ClassTimeSlot.get(i).getEndTime() &&
+                            startWeek == ClassTimeSlot.get(i).getStartWeek() &&
+                            endWeek == ClassTimeSlot.get(i).getEndWeek() &&
+                            weekInterval == ClassTimeSlot.get(i).getWeekInterval()) {
+                        timeSlotId = ClassTimeSlot.get(i).getTimeSlotId();
+                    }
+                }
+                int classId=1;
+                Byte semester = 1;
+                Date year = new Date()  ; //假设暂时只有这一个学期。。
+
+                Class class1 = new Class();
+                class1.setClassId(classId);
+                class1.setCourseId(courseId);
+                class1.setSchoolId(schoolId);
+                class1.setClassroom(classRoom);
+                class1.setTimeSlotId(timeSlotId);
+                class1.setSemester(semester);
+                class1.setYear(year);
+                //将class的信息存入数据库
+                new ClassServiceImpl().insert(class1);
+            }
         }
 
        return "";
     }
 
-    private static void getClassInfo(DomNode classInfo){
-
-        //下面的其实是TimeSlot的信息
-        String[] classDetails = classInfo.getTextContent().split(" ");
-
-        int weekday = WeekDay.getIndexOf(classDetails[1]);
-
-        String[] classSpan = classDetails[2].split("-");
-        int startTime = Integer.parseInt(classSpan[0]);
-        int endTime = Integer.parseInt(classSpan[1]);
-
-        int weekInterval = 0;
-        String weekTime;
-        if (classDetails[3].charAt(0) != '['){
-            weekInterval = 1;
-            weekTime= classDetails[3].substring(2, classDetails[3].length()-2);
-        } else{
-            weekTime = classDetails[3].substring(1, classDetails[3].length()-1);
-        }
-        String[] weekSpan = weekTime.split("-");
-        int startWeek = Integer.parseInt(weekSpan[0]);
-        int endWeek = Integer.parseInt(weekSpan[1]);
-
-        //向数据库中插入timeSlot的信息
-        int timeSlotId=1;
-        //只有当timeSlot的信息不完全一样的时候再存入数据库，并且每当有新的timeSlotId存入，其值自动加1
-        TimeSlot timeSlot = new TimeSlot(timeSlotId, weekday, startWeek, endWeek, startTime, endTime, weekInterval);
-        new TimeSlotServiceImpl().insert(timeSlot);
-
-        //数据库中已经有了有了Course，TimeSlot的信息，再保存class的信息即可
-
-        String classRoom = classDetails[4];
-
-        // 操作数据库
-        //与将courseInfo保存到数据库操作一样
-        //但是要比对class的上课时间表与TimeSlot数据库中已有的数据，以确定class的timeSlotId值
-        //以及对应的课程信息也要查询Course表，以确定Course的具体CourseId值
-
-        //  假装是一个函数
-         new    TimeSlotServiceImpl().selectAll()
-
-
+    private static void getClassInfo(DomNode classInfo) {
     }
+
 }
 
 enum WeekDay{

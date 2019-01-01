@@ -3,48 +3,25 @@ package com.pomeloish.superclass.controller;
 import com.pomeloish.superclass.model.Class;
 import com.pomeloish.superclass.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@RequestMapping(value = "api/classe")
 public class ClassController {
     @Autowired
     private ClassService classService;
 
-    @RequestMapping(value = "/addClass", method = RequestMethod.POST)
-    public boolean addClass(Class record) {
-        System.out.println("开始增加...");
-        return classService.insert(record);
+    @PostMapping
+    public boolean insertClass(@RequestBody Class class1) {
+        return classService.insert(class1);
     }
 
-    @RequestMapping(value = "/updateClass", method = RequestMethod.PUT)
-    public boolean updateClass(Class record) {
-        System.out.println("开始更新...");
-        return classService.updateByPrimaryKey(record);
+    @GetMapping(value = "/{classId}/{courseId}/{schoolId}")
+    public Class selectByPrimaryKey(@PathVariable("classId") Integer classId,
+                                    @PathVariable("courseId") String courseId,
+                                    @PathVariable("schoolId") Integer schoolId){
+        return classService.selectByPrimaryKey(classId,courseId,schoolId);
     }
 
-    @RequestMapping(value = "/deleteClass", method = RequestMethod.DELETE)
-    public boolean deleteClass(@RequestParam(value = "classId", required = true) Integer classId,
-                               @RequestParam(value = "courseId", required = true) String courseId,
-                               @RequestParam(value = "schoolId", required = true) Integer schoolId) {
-        System.out.println("开始删除...");
-        return classService.deleteByPrimaryKey(classId, courseId, schoolId);
-    }
-
-    @RequestMapping(value = "/selectClassByPrimaryKey", method = RequestMethod.GET)
-    public Class selectClassByPrimaryKey(@RequestParam(value = "classId", required = true) Integer classId,
-                                         @RequestParam(value = "courseId", required = true) String courseId,
-                                         @RequestParam(value = "schoolId", required = true) Integer schoolId) {
-        System.out.println("开始查询...");
-        return classService.selectByPrimaryKey(classId, courseId, schoolId);
-    }
-
-    @RequestMapping(value = "/selectClass", method = RequestMethod.GET)
-    public List<Class> selectClass() {
-        System.out.println("开始查询...");
-        return classService.selectAll();
-    }
 }
