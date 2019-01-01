@@ -6,11 +6,14 @@ import {
   Text
 } from 'react-native';
 
-export default class TimetableScreen extends Component{
+export default class Profile extends Component{
+    static navigationOptions = {
+        title: 'User',
+    };
 
     render(){
         return(
-            <Text>Timetable</Text>
+            <Text>USer Info</Text>
         )
     }
 }

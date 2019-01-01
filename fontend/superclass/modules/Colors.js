@@ -43,4 +43,53 @@ export const FlatUIColors = {
     Asbestos: '#7f8c8d'
 }
 
+export const ChineseColors = {
+    Orange: '#ffa631',
+    TenderGreen: '#bddd22',
+    Cinnabar: '#ff461f',
+    Blue: '#44cef6',
+    Lilac: '#b0a4e3',
+    PinkishGrey: '#edd1d8',
+    Amber: '#ca6924',
+    Primrose: '#eaff56',
+    PaleGreen: '#7fecad',
+    Vermilion: '#ff4e20',
+    Silver: '#e9e7ef'
+}
+
+export const ChineseColorNames = [
+    'Orange',
+    'TenderGreen',
+    'Cinnabar',
+    'Blue',
+    'Lilac',
+    'PinkishGrey',
+    'Amber',
+    'Primrose',
+    'PaleGreen',
+    'Vermilion'
+]
+
+export const ColorNames = [
+    'Red',
+    'Pink',
+    'Purple',
+    'DeepPurple',
+    'Indigo',
+    'Blue',
+    'LightBlue',
+    'Cyan',
+    'Teal',
+    'Green',
+    'LightGreen',
+    'Lime',
+    'Yellow',
+    'Amber',
+    'Orange',
+    'DeepOrange',
+    'Brown',
+    'Grey',
+    'BlueGrey'
+]
+
 export const NavColor = '#2196F3'

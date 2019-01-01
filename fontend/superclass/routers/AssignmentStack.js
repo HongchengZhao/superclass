@@ -1,11 +1,10 @@
 import { createMaterialTopTabNavigator } from 'react-navigation';
-import AssignmentDetailScreen from '../views/AssignmentDetailScreen';
-import SubmissionScreen from '../views/SubmissionScreen';
+import { AssignmentDetail, Submission } from '../screens';
 
 export default AssignmentStack = createMaterialTopTabNavigator(
     {
-        AssignmentDetail:  AssignmentDetailScreen,
-        Submission: SubmissionScreen
+        AssignmentDetail:  AssignmentDetail,
+        Submission: Submission
     },
     {
         swipeEnabled: false,

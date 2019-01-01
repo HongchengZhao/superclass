@@ -5,7 +5,7 @@ import DatePicker from 'react-native-datepicker'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default class CreateAssignmentScreen extends Component {
+export default class CreateAssignment extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: '发布新作业'
   })
@@ -19,7 +19,7 @@ export default class CreateAssignmentScreen extends Component {
 
   _onDescriptChange = (event) => {
     this.setState({
-      descriptHeight: event.nativeEvent.contentSize.height
+      detailHeight: event.nativeEvent.contentSize.height
     })
   }
 
@@ -67,7 +67,7 @@ export default class CreateAssignmentScreen extends Component {
                 multiline
                 containerStyle={{ flex: 1 }}
                 inputContainerStyle={[styles.inputContainer, { alignItems: 'flex-start' }]}
-                inputStyle={[styles.input, { height: Math.max(40, this.state.descriptHeight) }]}
+                inputStyle={[styles.input, { height: Math.max(40, this.state.detailHeight) }]}
                 onChange={this._onDescriptChange}
               />
             }

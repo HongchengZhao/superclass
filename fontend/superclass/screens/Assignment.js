@@ -4,17 +4,15 @@ import LinearGradient from 'react-native-linear-gradient'
 import TouchableScale from 'react-native-touchable-scale'
 import { ListItem, Button } from 'react-native-elements'
 
+import { HeaderButton } from '../components'
 
-export default class AssignmentScreen extends Component {
+
+export default class Assignment extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Assignment',
+    title: '作业',
     headerRight:
-      <Button
-        clear
-        title=''
+      <HeaderButton
         icon={{ name: 'plus', color: 'white', type: 'material-community' }}
-        iconContainerStyle={{ margin: 3, alignItems: 'center', justifyContent: 'center' }}
-        buttonStyle={styles.headerRight}
         onPress={() => navigation.navigate('CreateAssignment')}
       />
   })
@@ -104,12 +102,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     backgroundColor: '#2ecc71',
     marginVertical: 5
-  },
-  headerRight: {
-    margin: 13,
-    width: 30,
-    height: 30,
-    backgroundColor: 'transparent',
-    borderRadius: 30
   }
 });

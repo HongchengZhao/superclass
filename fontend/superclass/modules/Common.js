@@ -12,3 +12,5 @@ export const defaultConfig = {
     },
     gestureEnabled: true
 };
+
+export const BASE_URL = 'http://192.168.133.1:8080'

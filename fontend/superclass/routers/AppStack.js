@@ -1,29 +1,30 @@
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createBottomTabNavigator} from 'react-navigation';
-import TimetableScreen from '../views/TimetableScreen';
-import UserInfoScreen from '../views/UserInfoScreen';
-import ClassStack from './ClassStack';
+import { createBottomTabNavigator } from 'react-navigation';
 
+import { Profile } from '../screens';
+
+import ClassStack from './ClassStack';
+import CourseTableStack from './CourseTableStack';
 
 export default AppStack = createBottomTabNavigator(
   {
     ClassGroup: {
       screen: ClassStack,
       navigationOptions: {
-        title: 'Class'
+        title: '班级'
       }
     },
-    Timetable: {
-      screen: TimetableScreen,
+    CourseTable: {
+      screen: CourseTableStack,
       navigationOptions: {
-        title: 'Timetable'
+        title: '课程表'
       }
     },
-    UserInfo: {
-      screen: UserInfoScreen,
+    Profile: {
+      screen: Profile,
       navigationOptions: {
-        title: 'User'
+        title: '我的'
       }
     }
   },
@@ -36,9 +37,9 @@ export default AppStack = createBottomTabNavigator(
         let iconName;
         if (routeName === 'ClassGroup') {
           iconName = `account-multiple${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Timetable') {
+        } else if (routeName === 'CourseTable') {
           iconName = `calendar${focused ? '' : '-blank'}`;
-        } else if (routeName === 'UserInfo') {
+        } else if (routeName === 'Profile') {
           iconName = `account${focused ? '' : '-outline'}`;
         }
 
