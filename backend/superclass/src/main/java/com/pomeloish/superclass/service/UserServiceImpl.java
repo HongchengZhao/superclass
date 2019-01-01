@@ -10,6 +10,23 @@ import com.pomeloish.superclass.dao.UserMapper;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
+    @Override
+    public boolean checkPhoneNumber(String phoneNumber){
+       /* try{
+           return userMapper.checkPhoneNumber(phoneNumber);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return ;*/
+
+       int num = userMapper.checkPhoneNumber(phoneNumber);
+       if(num>0){
+           return  false;
+       }
+       else return true;
+    }
 
     @Override
     public boolean addUser(User user) {
@@ -18,9 +35,11 @@ public class UserServiceImpl implements UserService{
             /*
             检查电话号码是否已被注册
              */
-
-            userMapper.insert(user);
-            flag = true;
+            boolean test = checkPhoneNumber(user.getPhoneNumber());
+            if (test) {
+                userMapper.insert(user);
+                flag = true;
+            }
         } catch (Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -38,4 +57,34 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+
+    @Override
+    public User findByPhoneNumberAndPassword(String phoneNumber, String password) {
+        User user = userMapper.findByPhoneNumber(phoneNumber);
+        String psw=user.getPassword();
+        if(psw!=null) System.out.println("wrong");
+
+        if (user == null){
+            return null;
+        }
+        if (psw != password){
+            return null;
+        }
+        else return user;
+    }
+
+    @Override
+    public boolean updateUser(User user){
+        boolean flag = false;
+        try{
+            userMapper.updateUser(user);
+            flag = true;
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
 }

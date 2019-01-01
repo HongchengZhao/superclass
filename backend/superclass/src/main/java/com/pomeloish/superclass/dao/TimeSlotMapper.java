@@ -2,15 +2,23 @@ package com.pomeloish.superclass.dao;
 
 import com.pomeloish.superclass.model.TimeSlot;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
+@Mapper
 public interface TimeSlotMapper {
+    @Select({
+            "select count(*)",
+            "from time_slot",
+            "where weekday = #{weekday,jdbcType=INTEGER},",
+            "start_week = #{startWeek,jdbcType=INTEGER},",
+            "end_week = #{endWeek,jdbcType=INTEGER},",
+            "start_time = #{startTime,jdbcType=INTEGER},",
+            "end_time = #{endTime,jdbcType=INTEGER},",
+            "week_interval = #{weekInterval,jdbcType=INTEGER}"
+    })
+    int checkTimeSlot(Integer weekday,Integer startWeek,Integer endWeek,Integer startTime,Integer endTime,Integer weekInterval);
+
     @Delete({
         "delete from time_slot",
         "where time_slot_id = #{timeSlotId,jdbcType=INTEGER}"

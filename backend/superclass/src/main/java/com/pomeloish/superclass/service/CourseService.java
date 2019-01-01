@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CourseService {
     boolean deleteByPrimaryKey(@Param("courseId") String courseId, @Param("schoolId") Integer schoolId);
-    boolean insert(Course record);
+    boolean insert(Course course);
     boolean updateByPrimaryKey(Course record);
     boolean checkCourse(String courseId,Integer schoolId,String courseName,String teacherName);
     Course selectByPrimaryKey(@Param("courseId") String courseId, @Param("schoolId") Integer schoolId);

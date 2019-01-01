@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Service;
 
 public interface StudentAssignmentMapper {
     @Delete({
@@ -65,4 +66,10 @@ public interface StudentAssignmentMapper {
         "where uploaded_id = #{uploadedId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(StudentAssignment record);
+
+    @Select({
+     "select count(*)",
+     "from student_assignment"
+    })
+    int countStudent();
 }

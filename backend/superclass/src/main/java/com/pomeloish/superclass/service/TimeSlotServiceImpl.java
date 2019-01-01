@@ -42,17 +42,17 @@ public class TimeSlotServiceImpl implements  TimeSlotService{
     @Override
     public boolean insert(TimeSlot record) {
         boolean flag=false;
-        Integer weekday=record.getWeekday();
-        Integer startWeek=record.getStartWeek();
-        Integer endWeek=record.getEndWeek();
-        Integer startTime=record.getStartTime();
-        Integer endTime=record.getEndTime();
-        Integer weekInterval=record.getWeekInterval();
+      //  Integer weekday=record.getWeekday();
+      //  Integer startWeek=record.getStartWeek();
+      //  Integer endWeek=record.getEndWeek();
+     //   Integer startTime=record.getStartTime();
+     //   Integer endTime=record.getEndTime();
+    //    Integer weekInterval=record.getWeekInterval();
         try {
-            if(checkTimeSlot(weekday,startWeek,endWeek,startTime,endTime,weekInterval)){
+        //    if(checkTimeSlot(weekday,startWeek,endWeek,startTime,endTime,weekInterval)){
                 timeSlotMapper.insert(record);
                 flag = true;
-            }
+         //   }
         }catch (Exception e)
         {
             e.printStackTrace();

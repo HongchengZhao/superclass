@@ -23,4 +23,17 @@ public class UserController {
     public User findById(@PathVariable("id") Integer id){
         return userService.findById(id);
     }
+
+    @GetMapping(value="/{phoneNumber}/{password}")
+    public User findByPhoneNumberAndPassword(@PathVariable("phoneNumber") String phoneNumber,
+                                             @PathVariable("password") String password) {
+        return userService.findByPhoneNumberAndPassword(phoneNumber,password);
+    }
+
+    @PutMapping("/updateUser")
+    public boolean updateUser(@RequestBody User user){
+        return userService.updateUser(user);
+    }
+
+
 }

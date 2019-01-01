@@ -18,6 +18,19 @@ public class TimeSlot implements Serializable {
     private Integer weekInterval;
 
     private static final long serialVersionUID = 1L;
+    public TimeSlot(){
+
+    }
+
+    public TimeSlot(Integer timeSlotId,Integer weekday,Integer startWeek, Integer endWeek, Integer startTime,Integer  endTime, Integer weekInterval){
+        this.timeSlotId=timeSlotId;
+        this.weekday=weekday;
+        this.startWeek=startWeek;
+        this.endWeek=endWeek;
+        this.startTime=startTime;
+        this.endTime=endTime;
+        this.weekInterval=weekInterval;
+   }
 
     public Integer getTimeSlotId() {
         return timeSlotId;

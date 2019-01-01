@@ -40,18 +40,18 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public boolean insert(Course record){
+    public boolean insert(Course course){
         boolean flag=false;
-        String courseId=record.getCourseId();
-        Integer schoolId=record.getSchoolId();
-        String courseName=record.getCourseName();
-        String teacherName=record.getTeacherName();
+       // String courseId=course.getCourseId();
+       // Integer schoolId=course.getSchoolId();
+     //   String courseName=course.getCourseName();
+     //   String teacherName=course.getTeacherName();
         try{
-            if(checkCourse(courseId,schoolId,courseName,teacherName))
-            {
-                courseMapper.insert(record);
+           // if(checkCourse(courseId,schoolId,courseName,teacherName))
+
+                courseMapper.insert(course);
                 flag=true;
-            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

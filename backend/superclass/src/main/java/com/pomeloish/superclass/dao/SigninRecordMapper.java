@@ -34,4 +34,12 @@ public interface SigninRecordMapper {
         @Result(column="signin_id", property="signinId", jdbcType=JdbcType.INTEGER, id=true)
     })
     List<SigninRecord> selectAll();
+
+    @Select({
+            "select",
+            "user_id",
+            "from signin_record",
+            "where signin_id=#{signinId}"
+    })
+    SigninRecord checkSignin(int signinId);
 }

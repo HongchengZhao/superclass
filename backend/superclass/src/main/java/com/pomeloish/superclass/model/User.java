@@ -29,6 +29,8 @@ public class User implements Serializable {
     private Byte currentSemester;
 
     private static final long serialVersionUID = 1L;
+    public User(){
+    }
 
     public Integer getUserId() {
         return userId;
