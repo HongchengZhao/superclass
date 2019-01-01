@@ -5,7 +5,7 @@ import { SwipeListView } from 'react-native-swipe-list-view'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default class SubmissionScreen extends Component {
+export default class Submission extends Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: '提交情况'
   })

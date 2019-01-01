@@ -6,7 +6,7 @@ import CountDown from 'react-native-countdown-component'
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default class RollCallScreen extends Component {
+export default class RollCall extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: '签到'
   })

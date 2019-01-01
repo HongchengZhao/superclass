@@ -3,9 +3,11 @@ import { View, Dimensions, ScrollView, StyleSheet, Text } from 'react-native'
 import { Input, ListItem, Button } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
 
+import { AssignmentForm } from '../components'
+
 const SCREEN_WIDTH = Dimensions.get('window').width
 
-export default class AssignmentDetailScreen extends Component {
+export default class AssignmentDetail extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     tabBarLabel: '作业详情'
@@ -19,19 +21,71 @@ export default class AssignmentDetailScreen extends Component {
     }
   }
 
-  _onDescriptChange = (event) => {
-    this.setState({
-      descriptHeight: event.nativeEvent.contentSize.height
-    })
-  }
-
   render() {
     const navigation = this.props.navigation
     const assignment = navigation.getParam('assignment')
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fafafa' }}>
-        <ScrollView>
+        <AssignmentForm assignment/>
+        <Button
+          icon={{
+            name: 'edit',
+            color: 'white'
+          }}
+          title='编辑'
+          buttonStyle={styles.editBtn}
+          containerStyle={styles.editContainer}
+        />
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  sectionContent: {
+  },
+  container: {
+    paddingVertical: 5,
+    flexDirection: 'row'
+  },
+  label: {
+    width: 80,
+    height: 40,
+    marginRight: 10,
+    fontWeight: 'normal',
+    lineHeight: 40,
+    color: '#86939e',
+    fontSize: 14
+  },
+  inputContainer: {
+    borderBottomWidth: 0
+  },
+  input: {
+    fontSize: 16
+  },
+  editContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: '#eee',
+    height: 50,
+    padding: 5
+  },
+  editBtn: {
+    flexDirection: 'row-reverse',
+    width: '100%',
+    backgroundColor: '#8BC34A',
+    elevation: 0,
+    shadowOpacity: 0,
+    shadowColor: 'transparent'
+  }
+})
+
+
+/*
+ <ScrollView>
           <ListItem
             leftElement={<Text style={styles.label}>标题</Text>}
             title={
@@ -91,70 +145,14 @@ export default class AssignmentDetailScreen extends Component {
                 containerStyle={{ width: SCREEN_WIDTH - 20 }}
                 defaultValue={assignment.content}
                 inputContainerStyle={[styles.inputContainer, { alignItems: 'flex-start' }]}
-                inputStyle={[styles.input, { height: Math.max(40, this.state.descriptHeight) }]}
-                onChange={this._onDescriptChange}
+                inputStyle={[styles.input, { height: Math.max(40, this.state.detailHeight) }]}
+                onChange={this._onHeightChange}
               />
             }
             containerStyle={styles.container}
           />
+
+
         </ScrollView>
 
-        <Button
-          icon={{
-            name: 'edit',
-            color: 'white'
-          }}
-          title='编辑'
-          buttonStyle={styles.editBtn}
-          containerStyle={styles.editContainer}
-        />
-      </View>
-    )
-  }
-}
-
-const styles = StyleSheet.create({
-  sectionContent: {
-  },
-  headerRight: {
-    margin: 13,
-    width: 30,
-    height: 30,
-    backgroundColor: 'transparent',
-    borderRadius: 30
-  },
-  container: {
-    paddingVertical: 5
-  },
-  label: {
-    width: 80,
-    height: 40,
-    marginRight: 10,
-    fontWeight: 'normal',
-    lineHeight: 40,
-    color: '#86939e'
-  },
-  inputContainer: {
-    borderBottomWidth: 0
-  },
-  input: {
-    fontSize: 16
-  },
-  editContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#eee',
-    height: 50,
-    padding: 5
-  },
-  editBtn: {
-    flexDirection: 'row-reverse',
-    width: '100%',
-    backgroundColor: '#8BC34A',
-    elevation: 0,
-    shadowOpacity: 0,
-    shadowColor: 'transparent'
-  }
-})
+ */

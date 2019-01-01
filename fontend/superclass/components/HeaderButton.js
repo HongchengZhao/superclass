@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-native-elements';
 
-export default HeaderRightButton = props => {
+export default HeaderButton = props => {
     const {
         icon,
         ...attributes

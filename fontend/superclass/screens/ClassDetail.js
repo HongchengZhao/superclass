@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import { ListItem, Button, ButtonGroup } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
-import ClassMembersScreen from './ClassMembersScreen';
+import ClassMembers from './ClassMembers';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default class ClassDetailScreen extends Component {
+export default class ClassDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTransparent: true,
     headerStyle: {
@@ -48,7 +48,7 @@ export default class ClassDetailScreen extends Component {
               rightContentContainerStyle={{ marginRight: -10 }}
               containerStyle={{ padding: 0, marginBottom: 10, backgroundColor: 'transparent' }}
             />}
-          subtitle={<ClassMembersScreen smallScreen />}
+          subtitle={<ClassMembers smallScreen />}
           onPress={() => this.props.navigation.navigate('ClassMembers')}
           containerStyle={{ borderColor: '#eee', borderBottomWidth: 0.5 }}
         />

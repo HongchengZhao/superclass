@@ -6,19 +6,16 @@ import {
 } from 'react-native';
 import { GiftedChat, Actions, Bubble, SystemMessage } from 'react-native-gifted-chat';
 import { Button, Icon } from 'react-native-elements';
+import { HeaderButton } from '../components'
 
-export default class Example extends Component {
+export default class Chat extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: (navigation.state.params || {}).name || 'Chat!',
     headerRight:
-      <Button
-        clear
-        title=''
-        icon={{ name: 'more-horiz', color: 'white' }}
-        iconContainerStyle={{ margin: 3, alignItems: 'center', justifyContent: 'center' }}
-        buttonStyle={styles.headerRight}
-        onPress={() => navigation.navigate('ClassDetail')}
-      />
+    <HeaderButton
+      icon={{ name: 'more-horiz', color: 'white' }}
+      onPress={() => navigation.navigate('ClassDetail')}
+    />
   });
 
   constructor(props) {
@@ -248,13 +245,6 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 14,
     color: '#aaa',
-  },
-  headerRight: {
-    margin: 13,
-    width: 30,
-    height: 30,
-    backgroundColor: 'transparent',
-    borderRadius: 30
   }
 });
 

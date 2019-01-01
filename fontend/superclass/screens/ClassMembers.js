@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, SectionList, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { ListItem, Divider } from 'react-native-elements';
 
-export default class ClassMembersScreen extends Component {
+export default class ClassMembers extends Component {
   static navigationOptions = {
     title: 'Class Members'
   }

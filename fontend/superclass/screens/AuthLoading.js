@@ -7,7 +7,7 @@ import {
     View,
   } from 'react-native';
 
-export default class AuthLoadingScreen extends Component {
+export default class AuthLoading extends Component {
     constructor() {
       super();
       this._bootstrapAsync();
@@ -15,7 +15,7 @@ export default class AuthLoadingScreen extends Component {
   
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
-      const userToken = await AsyncStorage.getItem('userToken');
+      const userToken = await AsyncStorage.getItem('signedIn');
   
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.

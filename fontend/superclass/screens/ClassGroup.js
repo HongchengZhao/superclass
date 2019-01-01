@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View, Image, FlatList, StatusBar } from 'react-native';
 import { ListItem, Divider } from 'react-native-elements';
 
-export default class ClassGroupScreen extends Component {
+export default class ClassGroup extends Component {
   static navigationOptions = {
-    title: 'Class',
+    title: '班级',
   };
 
   constructor() {

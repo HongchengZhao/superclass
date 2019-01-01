@@ -9,7 +9,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../assets/images/bg_screen1.jpg');
 const BG_HTML = require('../assets/pages/background.html');
 
-export default class LoginScreen extends Component {
+export default class Login extends Component {
   static navigationOptions = ({ navigation }) => ({
     header: null
   })
